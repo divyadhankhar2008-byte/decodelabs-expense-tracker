@@ -1,152 +1,233 @@
-# 💰 Smart Expense Tracker — Project 2
+# 💰 DecodeLabs Expense Tracker
 
-> **DecodeLabs Industrial Training Kit | Batch 2026**
-> Author: Divya Bharti | Python Programming Intern
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
----
+**A comprehensive Python expense tracking application demonstrating the accumulator pattern, input validation, and defensive coding practices.**
 
-## 📌 Project Overview
+## 📋 Table of Contents
 
-A comprehensive command-line expense tracking application built as Project 2 of the DecodeLabs Python Programming Industrial Training Kit. This project goes well beyond simple accumulation — it delivers real financial intelligence through budget alerts, category breakdowns, monthly reports, and spending insights.
-
-Users can **log expenses, set budgets, analyse spending patterns, and track trends over time** — all persisted to a local JSON file between sessions.
-
----
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Technologies Used](#technologies-used)
+- [Learning Outcomes](#learning-outcomes)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## ✨ Features
 
-| Feature | Description |
-|---|---|
-| ➕ Add Expense | Amount, category, description, and payment method |
-| 🗂️ 9 Categories | Food, Transport, Shopping, Utilities, Health, Entertainment, Education, Rent, Other |
-| 🚨 Budget Alerts | Real-time warnings at 80% and 100% of monthly budget |
-| 📊 Category Breakdown | Visual bar chart of spending by category for current month |
-| 📅 Monthly Report | Last 6 months spending history with trend bars |
-| 💡 Spending Insights | All-time total, average per transaction, biggest expense, payment method split |
-| 🎯 Set Budgets | Per-category monthly budget limits |
-| 🗑️ Delete Expense | Remove any logged transaction |
-| 💾 JSON Persistence | All data saved to `expenses_data.json` — survives restarts |
-| 💱 Currency Config | Single-line change to switch between ₹ / $ / € |
+- ✅ **Add Expenses**: Track expenses by category and amount
+- ✅ **View Expenses**: Display all recorded expenses in a structured format
+- ✅ **Calculate Totals**: Automatically sum expenses by category or overall
+- ✅ **Input Validation**: Robust error handling for user inputs
+- ✅ **Data Persistence**: Save/load expenses from file storage
+- ✅ **Menu-Driven Interface**: Easy-to-use CLI navigation
+- ✅ **Budget Tracking**: Monitor spending against budget limits
 
----
-
-## 🎯 Key Concepts Demonstrated
-
-| Concept | Implementation |
-|---|---|
-| IPO Model | Input → Process → Output pipeline throughout |
-| Accumulator Pattern | `total += expense` — state preserved across iterations |
-| Type Safety (Gatekeeper) | `float(input())` converts raw string to number |
-| Defensive Coding (Poka-Yoke) | `try / except ValueError` blocks invalid input |
-| Kill Switch / Sentinel Value | `'9'` exits the menu gracefully |
-| State Anatomy | `data = {"expenses": [], "budget": {}}` — structured from the start |
-| File I/O | `json.load()` / `json.dump()` for persistent storage |
-| Date Handling | `date.today().isoformat()` for timestamping and monthly filtering |
-| Dictionary Aggregation | Category totals built with `.get()` pattern |
-
----
-
-## 🏗️ Architecture
-
-```
-Phase 1 — Load        : Read JSON file or initialise empty store
-Phase 2 — Menu Loop   : Display menu, capture choice, dispatch action
-Phase 3 — Action      : Validate input → mutate data → check budget
-Phase 4 — Persist     : Write updated data back to JSON
-Phase 5 — Feedback    : Print confirmation or alert to user
-```
-
----
-
-## 🚀 How to Run
+## 🚀 Installation
 
 ### Prerequisites
-- Python **3.x** installed
-- No external libraries — uses stdlib only (`json`, `os`, `datetime`)
+- Python 3.8 or higher
+- pip (Python package manager)
 
-### Steps
+### Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/divyadhankhar2008-byte/decodelabs-expense-tracker.git
+   cd decodelabs-expense-tracker
+   ```
+
+2. **Create a virtual environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\\Scripts\\activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## 💻 Usage
+
+### Running the Application
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/divyadhankhar2008-byte/decodelabs-expense-tracker.git
-
-# 2. Navigate into the folder
-cd decodelabs-expense-tracker
-
-# 3. Run the script
-python expense_tracker.py
+python main.py
 ```
 
----
-
-## 🖥️ Sample Output
+### Menu Options
 
 ```
-==================================================
-   💰  DecodeLabs Smart Expense Tracker  💰
-      Powered by DecodeLabs | Batch 2026
-==================================================
-
-── Menu ──────────────────────────────────
-  1. ➕ Add expense
-  2. 📋 View all expenses
-  3. 📆 View this month's expenses
-  4. 📊 Category breakdown (this month)
-  5. 📅 Monthly report
-  6. 💡 Spending insights
-  7. 🎯 Set monthly budget
-  8. 🗑️  Delete an expense
-  9. 🚪 Exit
-──────────────────────────────────────────
+=== Expense Tracker Menu ===
+1. Add Expense
+2. View All Expenses
+3. View Expenses by Category
+4. Calculate Total Expenses
+5. Set Budget Limit
+6. View Budget Status
+7. Exit
 ```
 
-**Category Breakdown Example:**
-```
-📊 Category Breakdown — 2026-05
-───────────────────────────────────────────────────────
-  🍔 Food & Dining
-    ₹  3,250.00  [████████████░░░░░░░░] 42.3% | Budget: ₹5,000 (65%)
-  🚗 Transport
-    ₹  1,800.00  [███████░░░░░░░░░░░░░] 23.4%
-  🛒 Shopping
-    ₹  2,630.00  [██████████░░░░░░░░░░] 34.2%
-───────────────────────────────────────────────────────
-  GRAND TOTAL: ₹7,680.00
+### Example Workflow
+
+```python
+# Start application
+$ python main.py
+
+# Add expenses
+Enter expense amount: 50.00
+Enter category: Food
+Expense added successfully!
+
+# View summary
+Total Expenses: $150.00
+Food: $50.00
+Transport: $30.00
 ```
 
-**Budget Alert Example:**
-```
-⚠️  WARNING: 80% of your 🍔 Food & Dining budget used this month.
-✅ Added: ₹350.00  |  🍔 Food & Dining  |  Lunch
-```
-
----
-
-## 📁 File Structure
+## 📁 Project Structure
 
 ```
 decodelabs-expense-tracker/
-├── expense_tracker.py    # Main application
-├── expenses_data.json    # Auto-generated on first run (gitignored)
-├── LICENSE
-└── README.md
+├── main.py                 # Main application entry point
+├── expense_tracker.py      # Core expense tracking logic
+├── utils/
+│   ├── __init__.py
+│   └── validators.py       # Input validation functions
+├── data/
+│   └── expenses.json       # Stored expense records
+├── tests/
+│   ├── __init__.py
+│   ├── test_expense_tracker.py
+│   └── test_validators.py
+├── requirements.txt        # Project dependencies
+├── .gitignore
+├── README.md
+└── LICENSE
 ```
 
----
+## 🛠 Technologies Used
 
-## 💡 What I Learned
+- **Python 3.8+**: Core language
+- **JSON**: Data persistence
+- **pytest**: Unit testing framework
+- **flake8**: Code linting
+- **black**: Code formatting
+- **mypy**: Static type checking
+- **GitHub Actions**: CI/CD automation
 
-By building this project I practised:
+## 📚 Learning Outcomes
 
-- **Accumulator pattern** — maintaining running totals across loop iterations
-- **Nested data structures** — expenses as a list of dicts inside a parent dict
-- **Date-based filtering** — slicing `YYYY-MM-DD` strings for monthly grouping
-- **Budget logic** — percentage-based threshold alerts on every transaction
-- **Financial aggregation** — grouping, summing, and sorting by category
+This project demonstrates:
 
----
+1. **Accumulator Pattern**
+   - Using variables to collect and aggregate data
+   - Implementing running totals and sums
 
-## 👩‍💻 Author
+2. **Input Validation**
+   - Type checking and error handling
+   - User-friendly error messages
+   - Try-except blocks for exception handling
+
+3. **Defensive Coding**
+   - Validating data before processing
+   - Edge case handling
+   - Secure file operations
+
+4. **Code Organization**
+   - Module separation
+   - Function decomposition
+   - Clear naming conventions
+
+5. **Data Management**
+   - File I/O operations
+   - JSON serialization
+   - Data structure design
+
+## 🧪 Testing
+
+### Run All Tests
+
+```bash
+pytest
+```
+
+### Run with Coverage Report
+
+```bash
+pytest --cov=. --cov-report=html
+```
+
+### Run Specific Test
+
+```bash
+pytest tests/test_expense_tracker.py::test_add_expense -v
+```
+
+## 🔍 Code Quality
+
+### Lint Code
+
+```bash
+flake8 .
+pylint *.py
+```
+
+### Format Code
+
+```bash
+black .
+```
+
+### Type Check
+
+```bash
+mypy .
+```
+
+## 📈 Future Enhancements
+
+- [ ] Add data visualization (charts/graphs)
+- [ ] Implement recurring expense categories
+- [ ] Add monthly/yearly reports
+- [ ] Database integration (SQLite)
+- [ ] Web interface (Flask/Django)
+- [ ] Mobile app support
+
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
+
+## 👤 Author
 
 **Divya Bharti**
-Python Programming Intern | DecodeLabs Batch 2026
+- GitHub: [@divyadhankhar2008-byte](https://github.com/divyadhankhar2008-byte)
+- DecodeLabs Industrial Training Kit - Project 2, Batch 2026
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+
+1. Check existing [GitHub Issues](https://github.com/divyadhankhar2008-byte/decodelabs-expense-tracker/issues)
+2. Create a new issue with detailed description
+3. Include error messages and steps to reproduce
+
+---
+
+**Made with ❤️ during DecodeLabs Internship 2026**
