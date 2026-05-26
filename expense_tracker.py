@@ -1,7 +1,7 @@
 # ============================================================
 #  DecodeLabs Industrial Training Kit — Project 2
 #  Expense Tracker | Batch 2026
-#  Author : [Your Name]
+#  Author : Divya Bharti 
 # ============================================================
 
 def main():
